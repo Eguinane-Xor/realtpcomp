@@ -1,0 +1,18 @@
+CREATE TABLE user(
+    id INTEGER PRIMARY KEY NOT NULL,
+    username VARCHAR(50),
+    password VARCHAR(50),
+    type INTEGER
+);
+
+CREATE TABLE produit(
+    id INTEGER PRIMARY KEY NOT NULL,
+    prix REAL,
+    type INTEGER,
+    adresse VARCHAR(100),
+    nbplaces INTEGER,
+    loueur USER
+);
+
+DROP TABLE user;
+DROP TABLE produit;
