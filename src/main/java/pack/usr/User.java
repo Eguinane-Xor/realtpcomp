@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected long id;
+    protected Integer id;
 
     protected TypeUser type;     //enum(locataire, loueur)
     protected String username, password;
@@ -29,11 +29,11 @@ public class User {
                 " name: "+this.username;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
