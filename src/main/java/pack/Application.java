@@ -27,12 +27,13 @@ public class Application {
     @Bean
     public CommandLineRunner initialize() {
         return (args) -> {
-            System.out.println("Initialisation BD");
             if(userRepository.count()==0) {
-                userRepository.save(new User(TypeUser.loueur, "Xoreas", "user"));
-                userRepository.save(new User(TypeUser.locataire, "Eguinane", "user"));
+                System.out.println("Initialisation BD User");
+                userRepository.save(new User("Xoreas", "user",TypeUser.loueur));
+                userRepository.save(new User("Eguinane", "user",TypeUser.locataire));
             }
             if(produitRepository.count()==0){
+                System.out.println("Initialisation BD Produit");
                 produitRepository.save(new Produit(737, TypeProduit.maison,
                         "3 Quartier Branly, Douchy-Les-Mines",6));
                 produitRepository.save(new Produit(420,TypeProduit.appartement,

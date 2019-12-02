@@ -40,8 +40,8 @@ public class Produit {
         this.prix = prix;
     }
 
-    public TypeProduit getType() {
-        return type;
+    public String getType() {
+        return type.toString();
     }
 
     public void setType(TypeProduit type) {

@@ -11,10 +11,20 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <ul class="navbar-nav mr-auto">
-        <a href="/index" ><button class="btn btn-outline-success my-2 my-sm-0" th:text="">Accueil </button></a>
+        <a href="index"><button class="btn btn-outline-success my-2 my-sm-0">Accueil</button></a>
     </ul>
-    <a href="/connexion"><button class="btn btn-outline-success my-2 my-sm-0">Connexion</button></a>
+    <a href="connexion"><button class="btn btn-outline-success my-2 my-sm-0">Connexion</button></a>
 </nav>
-
+<table>
+    <th:block th:each="produit : ${produits}">
+        <tr>
+            <td th:text="${produit.getType()}">...</td>
+            <td th:text="${produit.getAdresse()}">...</td>
+        </tr>
+        <tr>
+            <td colspan="2">...</td>
+        </tr>
+    </th:block>
+</table>
 </body>
 </html>

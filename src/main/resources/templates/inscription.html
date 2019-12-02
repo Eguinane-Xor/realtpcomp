@@ -10,25 +10,32 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <ul class="navbar-nav mr-auto">
-        <a href="/index" ><button class="btn btn-outline-success my-2 my-sm-0" th:text="">Accueil </button></a>
+        <a href="index"><button class="btn btn-outline-success my-2 my-sm-0">Accueil</button></a>
     </ul>
-    <a href="/connexion"><button class="btn btn-outline-success my-2 my-sm-0">Connexion</button></a>
+    <a href="connexion"><button class="btn btn-outline-success my-2 my-sm-0">Connexion</button></a>
 </nav>
 
 <div class="container">
     <div class="row">
         <div class="col"></div>
         <div class="col-6">
-            <form>
+            <form th:action="@{/inscription}" th:object="${user}" method="post">
                 <div class="form-group">
                     <label for="inputUsername">Username</label>
-                    <input type="username" class="form-control" id="inputUsername" placeholder="Username">
+                    <input th:field="*{username}" class="form-control" id="inputUsername" placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <input th:field="*{password}" class="form-control" id="inputPassword" placeholder="Password">
                 </div>
-                <a href="/inscrire"><button type="inscrire" class="btn btn-primary">S'inscrire</button></a>
+                <div class="form-group">
+                    <label>Type of User</label>
+                    <select th:field="*{type}" class="custom-select">
+                        <option selected value="locataire">Locataire</option>
+                        <option value="loueur">Loueur</option>
+                    </select>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Inscription"/>
             </form>
         </div>
         <div class="col"></div>

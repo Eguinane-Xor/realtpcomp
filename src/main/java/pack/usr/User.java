@@ -15,12 +15,11 @@ public class User {
 
     public User(){}
 
-    public User(TypeUser _type, String _username, String _password){
+    public User(String _username, String _password, TypeUser _type){
         this.type = _type;
         this.username = _username;
         this.password = _password;
     }
-
 
     @Override
     public String toString(){
@@ -60,4 +59,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
