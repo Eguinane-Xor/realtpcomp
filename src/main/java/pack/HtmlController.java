@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pack.prod.Produit;
 import pack.prod.ProduitRepository;
 import pack.usr.User;
 import pack.usr.UserRepository;
+
+import java.util.List;
 
 @Controller
 public class HtmlController {
@@ -18,7 +21,8 @@ public class HtmlController {
 
     @GetMapping("*")
     public String welcome(Model model) {
-        model.addAttribute("produits",produitRepository);
+        List<Produit> produits = produitRepository.findAll();
+        model.addAttribute("produits",produits);
         return "index";
     }
 
