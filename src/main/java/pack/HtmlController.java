@@ -1,6 +1,7 @@
 package pack;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,27 +27,38 @@ public class HtmlController {
         return "index";
     }
 
-    @GetMapping("/connexion")
-    public String connexion(){
-        return "connexion";
+    public String test(){
+        return "test";
     }
 
-    @GetMapping("/connecter")
-    public String connecter(){
-        return "index";
+    @GetMapping("/connexion")
+    public String connexion(Model model){
+        if(!model.containsAttribute("user"))
+            model.addAttribute("user",new User());
+        return "connexion";
     }
 
     @GetMapping("/inscription")
     public String inscription(Model model){
-        model.addAttribute("user",new User());
+        if(!model.containsAttribute("user"))
+            model.addAttribute("user",new User());
         return "inscription";
     }
     @PostMapping("/inscription")
-    public String inscrire(@ModelAttribute("user") User user){
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        System.out.println(user.getType());
-        return "index";
+    public String inscrire(@ModelAttribute("user") User user,Model model) {
+        if (userRepository.findByUsername(user.getUsername()) != null){ //non null si username deja dans db
+        return "inscription";
+    }else {
+            BCryptPasswordEncoder crypter = new BCryptPasswordEncoder();
+            user.setPassword(crypter.encode(user.getPassword()));
+            userRepository.save(user);
+            return welcome(model);
+        }
+    }
+
+    @GetMapping("/my_account")
+    public String my_account(){
+        return "my_account";
     }
 
 }

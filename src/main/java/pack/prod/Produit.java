@@ -7,13 +7,15 @@ import javax.persistence.*;
 public class Produit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    protected long id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @SequenceGenerator(name="product_generator", sequenceName = "product_seq", allocationSize=50)
+    protected int id;
 
     protected double prix;
     protected TypeProduit type;
     protected String adresse;
-    protected int nbPlaces;
+    protected int nb_Places;
+    protected int IDloueur;
 
     public Produit(){}
 
@@ -21,14 +23,22 @@ public class Produit {
         this.prix = prix;
         this.type = type;
         this.adresse = adresse;
-        this.nbPlaces = nbPlaces;
+        this.nb_Places = nbPlaces;
     }
 
-    public long getId() {
+    public Produit(double prix, TypeProduit type, String adresse, int nbPlaces,int loueur){
+        this.prix = prix;
+        this.type = type;
+        this.adresse = adresse;
+        this.nb_Places = nbPlaces;
+        this.IDloueur = loueur;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -57,10 +67,18 @@ public class Produit {
     }
 
     public int getNbPlaces() {
-        return nbPlaces;
+        return nb_Places;
     }
 
     public void setNbPlaces(int nbPlaces) {
-        this.nbPlaces = nbPlaces;
+        this.nb_Places = nbPlaces;
+    }
+
+    public int getLoueur() {
+        return IDloueur;
+    }
+
+    public void setLoueur(int loueur) {
+        this.IDloueur = loueur;
     }
 }

@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import pack.usr.TypeUser;
+import pack.usr.User;
 
 @Configuration
 @EnableWebSecurity
@@ -30,12 +33,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin()
                     .loginPage("/connexion")
                     .defaultSuccessUrl("/index")
-                    .failureUrl("/connexion?error=true")
+                    .failureUrl("/connexion?error")
                     .permitAll()
                 .and()
                     .logout()
                     .deleteCookies("JSESSIONID")
-                    .logoutUrl("/deconnexion")
+                    .logoutUrl("/logout")
                     .logoutSuccessUrl("/index?logout")
                     .permitAll();
     }
@@ -48,6 +51,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        User user =
+                new User("user","password", TypeUser.NONE);
+        return new InMemoryUserDetailsManager(user);
     }
 
     @Bean

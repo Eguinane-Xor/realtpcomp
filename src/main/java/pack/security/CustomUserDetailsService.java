@@ -43,4 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return authorities;
     }
 
+    public UserService getUserService() {
+        return userService;
+    }
 }

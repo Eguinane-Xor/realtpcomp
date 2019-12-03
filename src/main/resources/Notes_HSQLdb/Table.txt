@@ -1,7 +1,7 @@
 CREATE TABLE user(
     id INTEGER PRIMARY KEY NOT NULL,
     username VARCHAR(50),
-    password VARCHAR(50),
+    password LONGVARCHAR,
     type INTEGER
 );
 
@@ -10,9 +10,10 @@ CREATE TABLE produit(
     prix REAL,
     type INTEGER,
     adresse VARCHAR(100),
-    nbplaces INTEGER,
-    loueur USER
+    nb_places INTEGER,
+    IDloueur INTEGER NOT NULL,
+    FOREIGN KEY(IDloueur) REFERENCES user(id)
 );
 
-DROP TABLE user;
 DROP TABLE produit;
+DROP TABLE user;

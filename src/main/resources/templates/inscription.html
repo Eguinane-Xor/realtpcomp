@@ -19,14 +19,15 @@
     <div class="row">
         <div class="col"></div>
         <div class="col-6">
+            <div style="text-align: center">Si vous revenez, utilisez un username different</div>
             <form th:action="@{/inscription}" th:object="${user}" method="post">
                 <div class="form-group">
                     <label for="inputUsername">Username</label>
-                    <input th:field="*{username}" class="form-control" id="inputUsername" placeholder="Username">
+                    <input th:field="*{username}" class="form-control" id="inputUsername" placeholder="Username" required>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword">Password</label>
-                    <input th:field="*{password}" class="form-control" id="inputPassword" placeholder="Password">
+                    <input type="password" th:field="*{password}" class="form-control" id="inputPassword" placeholder="Password" required>
                 </div>
                 <div class="form-group">
                     <label>Type of User</label>
