@@ -20,6 +20,7 @@
         <input type="submit" class="btn btn-danger" value="Sign Out"/>
     </form>
 </nav>
+
 <div sec:authorize="isAuthenticated()">Vous etes connecte en tant que [[${#httpServletRequest.remoteUser}]]</div>
 <div th:if="${param.logout}">
     You have been logged out.
