@@ -3,7 +3,7 @@ package pack.prod;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Produit")
+@Table(name = "produit")
 public class Produit {
 
     @Id
@@ -16,15 +16,10 @@ public class Produit {
     protected String adresse;
     protected int nb_Places;
     protected int IDloueur;
+    protected int IDlocataire;
+    protected boolean enAttente;
 
     public Produit(){}
-
-    public Produit(double prix, TypeProduit type, String adresse, int nbPlaces) {
-        this.prix = prix;
-        this.type = type;
-        this.adresse = adresse;
-        this.nb_Places = nbPlaces;
-    }
 
     public Produit(double prix, TypeProduit type, String adresse, int nbPlaces,int loueur){
         this.prix = prix;
@@ -32,6 +27,8 @@ public class Produit {
         this.adresse = adresse;
         this.nb_Places = nbPlaces;
         this.IDloueur = loueur;
+        this.enAttente = false;
+        this.IDlocataire = -1;
     }
 
     public int getId() {
@@ -80,5 +77,29 @@ public class Produit {
 
     public void setLoueur(int loueur) {
         this.IDloueur = loueur;
+    }
+
+    public int getIDlocataire() {
+        return IDlocataire;
+    }
+
+    public void setIDlocataire(int IDlocataire) {
+        this.IDlocataire = IDlocataire;
+    }
+
+    public int getIDloueur() {
+        return IDloueur;
+    }
+
+    public void setIDloueur(int IDloueur) {
+        this.IDloueur = IDloueur;
+    }
+
+    public boolean isEnAttente() {
+        return enAttente;
+    }
+
+    public void setEnAttente(boolean enAttente) {
+        this.enAttente = enAttente;
     }
 }

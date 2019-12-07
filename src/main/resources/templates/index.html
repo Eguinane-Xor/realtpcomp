@@ -20,21 +20,55 @@
         <input type="submit" class="btn btn-danger" value="Sign Out"/>
     </form>
 </nav>
-<div sec:authorize=sec:authorize="isAuthenticated()">Vous etes connecte en tant que [[${#httpServletRequest.remoteUser}]]</div>
+<div sec:authorize="isAuthenticated()">Vous etes connecte en tant que [[${#httpServletRequest.remoteUser}]]</div>
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-
-<table>
-    <th:block th:each="produit : ${produits}">
-        <tr>
-            <td th:text="*{produit.getType()}">...</td>
+<br>
+<table class="table" th:if="${role.equals('loueur')}">
+    <thead>A confirmer
+    <th scope="col">Type</th>
+    <th scope="col">Adresse</th>
+    <th scope="col">Loyer</th>
+    <th>Action</th>
+    </thead>
+    <tbody th:each="produit : ${produits}">
+        <tr th:if="${produit.isEnAttente()}">
+            <td th:text="${produit.getType()}">...</td>
             <td th:text="${produit.getAdresse()}">...</td>
-        </tr>
-        <tr>
             <td colspan="2" th:text="${produit.getPrix()}">...</td>
+            <td sec:authorize="isAuthenticated()" th:if="${role.equals('loueur')}">
+                <form th:action="@{/confirmer}" method="post">
+                <button type="submit" class="btn btn-primary" th:name="action" th:value="${produit.getId()}">Confirmer</button>
+                </form>
+                <form th:action="@{/refuser}" method="post">
+                    <button type="submit" class="btn btn-primary" th:name="action" th:value="${produit.getId()}">Refuser</button>
+                </form>
+            </td>
         </tr>
-    </th:block>
+    </tbody>
 </table>
+<br>
+<table class="table">
+    <thead>
+        <th scope="col">Type</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Loyer</th>
+        <th sec:authorize="isAuthenticated()">Action</th>
+    </thead>
+    <tbody th:each="produit : ${produits}">
+        <form th:action="@{/abonner}" method="post">
+            <tr th:if="${produit.getIDlocataire()==-1}">
+                <td th:text="${produit.getType()}">...</td>
+                <td th:text="${produit.getAdresse()}">...</td>
+                <td th:text="${produit.getPrix()}">...</td>
+                <td sec:authorize="isAuthenticated()" th:if="${role.equals('locataire')}">
+                  <button type="submit" class="btn btn-primary" th:name="action" th:value="${produit.getId()}">Envoyer demande de location</button>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+</table>
+
 </body>
 </html>

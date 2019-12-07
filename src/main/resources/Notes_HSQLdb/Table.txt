@@ -1,3 +1,6 @@
+DROP TABLE produit;
+DROP TABLE user;
+
 CREATE TABLE user(
     id INTEGER PRIMARY KEY NOT NULL,
     username VARCHAR(50),
@@ -11,9 +14,8 @@ CREATE TABLE produit(
     type INTEGER,
     adresse VARCHAR(100),
     nb_places INTEGER,
+    enAttente BOOLEAN,
     IDloueur INTEGER NOT NULL,
+    IDlocataire INTEGER NOT NULL,
     FOREIGN KEY(IDloueur) REFERENCES user(id)
 );
-
-DROP TABLE produit;
-DROP TABLE user;

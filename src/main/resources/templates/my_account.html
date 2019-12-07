@@ -21,8 +21,55 @@
     </form>
 </nav>
 
+<!--if user is locataire-->
+<div th:if="${role.equals('locataire')}">
+    <table class="table">
+        <thead>
+        <th scope="col">Type</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Loyer</th>
+        <th scope="col">Action</th>
+        </thead>
+        <tbody th:each="produit : ${produits}">
+        <form th:action="@{/desabonner}" method="post">
+            <tr th:if="${id.equals(produit.getIDlocataire()+'')}">
+                <td th:text="${produit.getType()}">...</td>
+                <td th:text="${produit.getAdresse()}">...</td>
+                <td th:text="${produit.getPrix()}">...</td>
+                <td>
+                    <button type="submit" class="btn btn-danger" th:name="action" th:value="${produit.getId()}">Delete</button>
+                    <td th:if="${produit.isEnAttente()}" style="color : orange">En attente</td>
+                </td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+</div>
 
-
+<!--if user is loueur-->
+<div th:if="${role.equals('loueur')}">
+    <table class="table">
+        <thead>
+        <th scope="col">Type</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Loyer</th>
+        <th scope="col">Action</th>
+        </thead>
+        <tbody th:each="produit : ${produits}">
+        <form th:action="@{/supprimer}" method="post">
+            <tr th:if="${id.equals(produit.getIDloueur()+'')}">
+                <td th:text="${produit.getType()}">...</td>
+                <td th:text="${produit.getAdresse()}">...</td>
+                <td th:text="${produit.getPrix()}">...</td>
+                <td>
+                    <button type="submit" class="btn btn-danger" th:name="action" th:value="${produit.getId()}">Delete</button>
+                    <td th:if="${produit.isEnAttente()}" style="color : orange">En attente</td>
+                </td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>
